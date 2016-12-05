@@ -1,13 +1,13 @@
-# Simple Weather
+# Weather Commandline
 An npm commandline to get the forecast.
 
 # How to :
 
 ## Install
-To install **simple-weather** simply write the following in your prompt:
+To install **weather-commandline** simply write the following in your prompt:
 
 ```bash
-  npm install -g simple-weather && weather
+  npm install -g weather-commandline && weather
 ```
 
 ## Usage
