@@ -1,7 +1,7 @@
 {
-  "name": "simple-weather",
+  "name": "weather-commandline",
   "version": "1.0.0",
-  "description": "",
+  "description": "An npm commandline to get the forecast.",
   "main": "index.js",
   "dependencies": {
     "chalk": "^1.1.3",
@@ -14,9 +14,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin" : {
+  "bin": {
     "weather": "./index.js"
   },
   "author": "Rawnly",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rawnly/weather-commandline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rawnly/weather-commandline/issues"
+  },
+  "homepage": "https://github.com/Rawnly/weather-commandline#readme"
 }
