@@ -1,4 +1,4 @@
-# Weather 
+# Weather
 An npm commandline to get the [darksky](https://darksky.net) forecast.
 
 

@@ -2,8 +2,10 @@
 const got = require('got');
 const chalk = require('chalk');
 const show = require('./lib');
-const token = "5884bb7f746da897d43f2189e5f3221a";
+const Conf = require('conf');
 
+const config = new Conf();
+const token = config.get('token') || '5884bb7f746da897d43f2189e5f3221a';
 let darkskyAPI = 'https://api.darksky.net/forecast/' + token + '/';
 
 function info(lat, long, type = 'short') {
@@ -41,6 +43,8 @@ function info(lat, long, type = 'short') {
         console.log();
       }
 
+    }).catch((err) => {
+      throw new Error(err)
     })
 
   }
