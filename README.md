@@ -6,7 +6,7 @@ An npm commandline to get the [darksky](https://darksky.net) forecast.
 To install `weather-commandline` you must use **npm** or **yarn**
 
 ```bash
-  $ [sudo] npm i -g weather-cli # or yarn
+  $ [sudo] npm i -g weather-commandline # or yarn
 ```
 
 # Usage
