@@ -1,105 +1,51 @@
-#!/usr/bin/env node
-/**
- * Module dependencies.
- */
+#! /usr/bin/env node
+'use strict';
 
-var request = require('request');
-var chalk = require('chalk');
-var program = require('commander');
-var clear = require('clear');
-
-/**
- * Variables
- */
+const got = require('got');
+const chalk = require('chalk');
+const meow = require('meow');
+const pkg = require('./package.json');
+const show = require('./libs/lib');
+const info = require('./libs/info');
 
 const token = "5884bb7f746da897d43f2189e5f3221a";
-const author = "Rawnly";
+const darkskyAPI = 'https://api.darksky.net/forecast/' + token + '/';
 
-/**
- * Commander setup
- */
+const cli = meow(`
 
-program
-.version('0.1.1');
+  Usage
+    $ weather [--options]
 
-program.parse(process.argv);
+  Help
+    -f --full       # Display windspeed and temperature
+    -t --token      # Set your own darksky token
 
+`, {
+  alias: {
+    f: 'full',
+    t: 'token'
+  }
+})
 
-/**
-* Functions
-*/
+function weather(actions, flags) {
+  if (flags.full) {
 
-function checkStatus() {
-  var url = 'https://api.darksky.net/forecast/' + token + '/49,12';
+    got('http://freegeoip.net/json/').then(({body}) => {
+      const data = JSON.parse(body);
+      info(data.latitude, data.longitude, 'full');
+    })
 
-  request(url, function (error , response , body) {
-    if ( error ) {
-      console.log(error);
-    }
-    if ( !error && response.statusCode == 200 ) {
-      const data = body ? JSON.parse(body) : null;
-      var status = 'online';
-      console.log('Server is ' + status);
-    }
-  });
-}
-
-function showTemp(t) { // numeric
-  if ( t < 20 ) {
-    console.log('Current temperature => ' + chalk.blue(t + ' C') );
-  } else if ( t > 26 ) {
-    console.log('Current temperature => ' + chalk.red(t + ' C'));
+  } else if (flags.token) {
+    console.log();
+    console.log(token);
+    console.log();
   } else {
-    console.log('Current temperature => ' + chalk.yellow(t + ' C'));
-  }
-}
-
-function windSpeed(s) { // numeric
-  if ( s < 13 ) {
-    console.log('Current wind => ' + chalk.green(s + ' Km/h') );
-  } else if ( s > 23 ) {
-    console.log('Current wind => ' + chalk.red(s + ' Km/h'));
-  } else {
-    console.log('Current wind => ' + chalk.yellow(s + ' Km/h'));
-  }
-}
-
-/**
- * Get latitude and longitude
- */
-
-request('http://freegeoip.net/json/', function (error, response, body) {
-  if ( error ) {
-    console.log("Error. Check your connection!");
-  }
-
-
-  if (!error && response.statusCode == 200) {
-    const data = JSON.parse(body);
-
-    var lat = data.latitude;
-    var long = data.longitude;
-
-    info(lat, long);
-  }
-});
-
-/**
- * Get weather summary windspeed and temperature
- */
-function info(lat, long) {
-  request('https://api.darksky.net/forecast/' + token + '/' + lat + ',' + long + '?units=ca', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+    got('http://freegeoip.net/json/').then(({body}) => {
       const data = JSON.parse(body);
 
-      var summary = data.currently.summary;
-      var temp = data.currently.temperature;
-      var windspeed = data.currently.windSpeed;
-
-      console.log(summary);
-      showTemp(temp);
-      windSpeed(windspeed);
-
-    }
-  });
+      info(data.latitude, data.longitude, 'short');
+    })
+  }
 }
+
+weather(cli.input[0], cli.flags)

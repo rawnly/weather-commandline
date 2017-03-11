@@ -1,16 +1,15 @@
-# Weather Commandline
-An npm commandline to get the forecast.
+# Weather 
+An npm commandline to get the [darksky](https://darksky.net) forecast.
 
-# How to :
 
-## Install
-To install **weather-commandline** simply write the following in your prompt:
+# Installation
+To install `weather-commandline` you must use **npm** or **yarn**
 
 ```bash
-  npm install -g weather-commandline && weather
+  $ [sudo] npm i -g weather-cli # or yarn
 ```
 
-## Usage
-![term][commandline]
-
-[commandline]: img/terminal.gif
+# Usage
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/16429579/23818987/045901de-0601-11e7-9105-d4db235b282f.gif" alt="weather-gif" />
+</p>
