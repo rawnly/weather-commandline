@@ -4,6 +4,7 @@
   "description": "CLI for darksky forecast.",
   "main": "build/index.js",
   "scripts": {
+    "build": "babel src -d build",
     "test": "ava"
   },
   "dependencies": {
