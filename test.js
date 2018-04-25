@@ -2,11 +2,8 @@ import test from 'ava'
 import execa from 'execa'
 import pkg from './package'
 
-test('Test 1', () => {
+test('Version Check', t => {
   execa('node', ['index.js', '--version'], (stderr, stdout) => {
-    if (stdout === pkg.version) {
-      return true
-    }
-    return false
+    t.is(stdout, pkg.version)
   })
 })
